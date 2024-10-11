@@ -41,7 +41,7 @@ from .nca_invitations import (
     NcaInvitationsResourceWithStreamingResponse,
     AsyncNcaInvitationsResourceWithStreamingResponse,
 )
-from ....types.orgs.team_list_response import TeamListResponse
+from ....types.shared.team import Team
 
 __all__ = ["TeamsResource", "AsyncTeamsResource"]
 
@@ -90,7 +90,7 @@ class TeamsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SyncPageNumberTeams[TeamListResponse]:
+    ) -> SyncPageNumberTeams[Team]:
         """
         List all Teams
 
@@ -111,7 +111,7 @@ class TeamsResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `org_name` but received {org_name!r}")
         return self._get_api_list(
             f"/v2/org/{org_name}/teams",
-            page=SyncPageNumberTeams[TeamListResponse],
+            page=SyncPageNumberTeams[Team],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -125,7 +125,7 @@ class TeamsResource(SyncAPIResource):
                     team_list_params.TeamListParams,
                 ),
             ),
-            model=TeamListResponse,
+            model=Team,
         )
 
 
@@ -173,7 +173,7 @@ class AsyncTeamsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AsyncPaginator[TeamListResponse, AsyncPageNumberTeams[TeamListResponse]]:
+    ) -> AsyncPaginator[Team, AsyncPageNumberTeams[Team]]:
         """
         List all Teams
 
@@ -194,7 +194,7 @@ class AsyncTeamsResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `org_name` but received {org_name!r}")
         return self._get_api_list(
             f"/v2/org/{org_name}/teams",
-            page=AsyncPageNumberTeams[TeamListResponse],
+            page=AsyncPageNumberTeams[Team],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -208,7 +208,7 @@ class AsyncTeamsResource(AsyncAPIResource):
                     team_list_params.TeamListParams,
                 ),
             ),
-            model=TeamListResponse,
+            model=Team,
         )
 
 

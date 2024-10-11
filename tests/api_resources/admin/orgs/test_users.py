@@ -97,6 +97,54 @@ class TestUsers:
             )
 
     @parametrize
+    def test_method_retrieve(self, client: Ngc) -> None:
+        user = client.admin.orgs.users.retrieve(
+            user_email_or_id="user-email-or-id",
+            org_name="org-name",
+        )
+        assert_matches_type(User, user, path=["response"])
+
+    @parametrize
+    def test_raw_response_retrieve(self, client: Ngc) -> None:
+        response = client.admin.orgs.users.with_raw_response.retrieve(
+            user_email_or_id="user-email-or-id",
+            org_name="org-name",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        user = response.parse()
+        assert_matches_type(User, user, path=["response"])
+
+    @parametrize
+    def test_streaming_response_retrieve(self, client: Ngc) -> None:
+        with client.admin.orgs.users.with_streaming_response.retrieve(
+            user_email_or_id="user-email-or-id",
+            org_name="org-name",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            user = response.parse()
+            assert_matches_type(User, user, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_path_params_retrieve(self, client: Ngc) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `org_name` but received ''"):
+            client.admin.orgs.users.with_raw_response.retrieve(
+                user_email_or_id="user-email-or-id",
+                org_name="",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_email_or_id` but received ''"):
+            client.admin.orgs.users.with_raw_response.retrieve(
+                user_email_or_id="",
+                org_name="org-name",
+            )
+
+    @parametrize
     def test_method_add(self, client: Ngc) -> None:
         user = client.admin.orgs.users.add(
             id="id",
@@ -400,6 +448,54 @@ class TestAsyncUsers:
             await async_client.admin.orgs.users.with_raw_response.create(
                 org_name="",
                 email="xxxxxx",
+            )
+
+    @parametrize
+    async def test_method_retrieve(self, async_client: AsyncNgc) -> None:
+        user = await async_client.admin.orgs.users.retrieve(
+            user_email_or_id="user-email-or-id",
+            org_name="org-name",
+        )
+        assert_matches_type(User, user, path=["response"])
+
+    @parametrize
+    async def test_raw_response_retrieve(self, async_client: AsyncNgc) -> None:
+        response = await async_client.admin.orgs.users.with_raw_response.retrieve(
+            user_email_or_id="user-email-or-id",
+            org_name="org-name",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        user = await response.parse()
+        assert_matches_type(User, user, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_retrieve(self, async_client: AsyncNgc) -> None:
+        async with async_client.admin.orgs.users.with_streaming_response.retrieve(
+            user_email_or_id="user-email-or-id",
+            org_name="org-name",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            user = await response.parse()
+            assert_matches_type(User, user, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_retrieve(self, async_client: AsyncNgc) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `org_name` but received ''"):
+            await async_client.admin.orgs.users.with_raw_response.retrieve(
+                user_email_or_id="user-email-or-id",
+                org_name="",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_email_or_id` but received ''"):
+            await async_client.admin.orgs.users.with_raw_response.retrieve(
+                user_email_or_id="",
+                org_name="org-name",
             )
 
     @parametrize

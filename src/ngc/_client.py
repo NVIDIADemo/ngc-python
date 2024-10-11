@@ -47,13 +47,10 @@ __all__ = [
 
 class Ngc(SyncAPIClient):
     orgs: resources.OrgsResource
-    users: resources.UsersResource
+    me: resources.MeResource
     admin: resources.AdminResource
     users_management: resources.UsersManagementResource
     services: resources.ServicesResource
-    v3_orgs_users: resources.V3OrgsUsersResource
-    v3_orgs_teams_users: resources.V3OrgsTeamsUsersResource
-    v3_orgs: resources.V3OrgsResource
     roles: resources.RolesResource
     public_keys: resources.PublicKeysResource
     health: resources.HealthResource
@@ -116,13 +113,10 @@ class Ngc(SyncAPIClient):
         )
 
         self.orgs = resources.OrgsResource(self)
-        self.users = resources.UsersResource(self)
+        self.me = resources.MeResource(self)
         self.admin = resources.AdminResource(self)
         self.users_management = resources.UsersManagementResource(self)
         self.services = resources.ServicesResource(self)
-        self.v3_orgs_users = resources.V3OrgsUsersResource(self)
-        self.v3_orgs_teams_users = resources.V3OrgsTeamsUsersResource(self)
-        self.v3_orgs = resources.V3OrgsResource(self)
         self.roles = resources.RolesResource(self)
         self.public_keys = resources.PublicKeysResource(self)
         self.health = resources.HealthResource(self)
@@ -237,13 +231,10 @@ class Ngc(SyncAPIClient):
 
 class AsyncNgc(AsyncAPIClient):
     orgs: resources.AsyncOrgsResource
-    users: resources.AsyncUsersResource
+    me: resources.AsyncMeResource
     admin: resources.AsyncAdminResource
     users_management: resources.AsyncUsersManagementResource
     services: resources.AsyncServicesResource
-    v3_orgs_users: resources.AsyncV3OrgsUsersResource
-    v3_orgs_teams_users: resources.AsyncV3OrgsTeamsUsersResource
-    v3_orgs: resources.AsyncV3OrgsResource
     roles: resources.AsyncRolesResource
     public_keys: resources.AsyncPublicKeysResource
     health: resources.AsyncHealthResource
@@ -306,13 +297,10 @@ class AsyncNgc(AsyncAPIClient):
         )
 
         self.orgs = resources.AsyncOrgsResource(self)
-        self.users = resources.AsyncUsersResource(self)
+        self.me = resources.AsyncMeResource(self)
         self.admin = resources.AsyncAdminResource(self)
         self.users_management = resources.AsyncUsersManagementResource(self)
         self.services = resources.AsyncServicesResource(self)
-        self.v3_orgs_users = resources.AsyncV3OrgsUsersResource(self)
-        self.v3_orgs_teams_users = resources.AsyncV3OrgsTeamsUsersResource(self)
-        self.v3_orgs = resources.AsyncV3OrgsResource(self)
         self.roles = resources.AsyncRolesResource(self)
         self.public_keys = resources.AsyncPublicKeysResource(self)
         self.health = resources.AsyncHealthResource(self)
@@ -428,13 +416,10 @@ class AsyncNgc(AsyncAPIClient):
 class NgcWithRawResponse:
     def __init__(self, client: Ngc) -> None:
         self.orgs = resources.OrgsResourceWithRawResponse(client.orgs)
-        self.users = resources.UsersResourceWithRawResponse(client.users)
+        self.me = resources.MeResourceWithRawResponse(client.me)
         self.admin = resources.AdminResourceWithRawResponse(client.admin)
         self.users_management = resources.UsersManagementResourceWithRawResponse(client.users_management)
         self.services = resources.ServicesResourceWithRawResponse(client.services)
-        self.v3_orgs_users = resources.V3OrgsUsersResourceWithRawResponse(client.v3_orgs_users)
-        self.v3_orgs_teams_users = resources.V3OrgsTeamsUsersResourceWithRawResponse(client.v3_orgs_teams_users)
-        self.v3_orgs = resources.V3OrgsResourceWithRawResponse(client.v3_orgs)
         self.roles = resources.RolesResourceWithRawResponse(client.roles)
         self.public_keys = resources.PublicKeysResourceWithRawResponse(client.public_keys)
         self.health = resources.HealthResourceWithRawResponse(client.health)
@@ -444,13 +429,10 @@ class NgcWithRawResponse:
 class AsyncNgcWithRawResponse:
     def __init__(self, client: AsyncNgc) -> None:
         self.orgs = resources.AsyncOrgsResourceWithRawResponse(client.orgs)
-        self.users = resources.AsyncUsersResourceWithRawResponse(client.users)
+        self.me = resources.AsyncMeResourceWithRawResponse(client.me)
         self.admin = resources.AsyncAdminResourceWithRawResponse(client.admin)
         self.users_management = resources.AsyncUsersManagementResourceWithRawResponse(client.users_management)
         self.services = resources.AsyncServicesResourceWithRawResponse(client.services)
-        self.v3_orgs_users = resources.AsyncV3OrgsUsersResourceWithRawResponse(client.v3_orgs_users)
-        self.v3_orgs_teams_users = resources.AsyncV3OrgsTeamsUsersResourceWithRawResponse(client.v3_orgs_teams_users)
-        self.v3_orgs = resources.AsyncV3OrgsResourceWithRawResponse(client.v3_orgs)
         self.roles = resources.AsyncRolesResourceWithRawResponse(client.roles)
         self.public_keys = resources.AsyncPublicKeysResourceWithRawResponse(client.public_keys)
         self.health = resources.AsyncHealthResourceWithRawResponse(client.health)
@@ -460,13 +442,10 @@ class AsyncNgcWithRawResponse:
 class NgcWithStreamedResponse:
     def __init__(self, client: Ngc) -> None:
         self.orgs = resources.OrgsResourceWithStreamingResponse(client.orgs)
-        self.users = resources.UsersResourceWithStreamingResponse(client.users)
+        self.me = resources.MeResourceWithStreamingResponse(client.me)
         self.admin = resources.AdminResourceWithStreamingResponse(client.admin)
         self.users_management = resources.UsersManagementResourceWithStreamingResponse(client.users_management)
         self.services = resources.ServicesResourceWithStreamingResponse(client.services)
-        self.v3_orgs_users = resources.V3OrgsUsersResourceWithStreamingResponse(client.v3_orgs_users)
-        self.v3_orgs_teams_users = resources.V3OrgsTeamsUsersResourceWithStreamingResponse(client.v3_orgs_teams_users)
-        self.v3_orgs = resources.V3OrgsResourceWithStreamingResponse(client.v3_orgs)
         self.roles = resources.RolesResourceWithStreamingResponse(client.roles)
         self.public_keys = resources.PublicKeysResourceWithStreamingResponse(client.public_keys)
         self.health = resources.HealthResourceWithStreamingResponse(client.health)
@@ -476,15 +455,10 @@ class NgcWithStreamedResponse:
 class AsyncNgcWithStreamedResponse:
     def __init__(self, client: AsyncNgc) -> None:
         self.orgs = resources.AsyncOrgsResourceWithStreamingResponse(client.orgs)
-        self.users = resources.AsyncUsersResourceWithStreamingResponse(client.users)
+        self.me = resources.AsyncMeResourceWithStreamingResponse(client.me)
         self.admin = resources.AsyncAdminResourceWithStreamingResponse(client.admin)
         self.users_management = resources.AsyncUsersManagementResourceWithStreamingResponse(client.users_management)
         self.services = resources.AsyncServicesResourceWithStreamingResponse(client.services)
-        self.v3_orgs_users = resources.AsyncV3OrgsUsersResourceWithStreamingResponse(client.v3_orgs_users)
-        self.v3_orgs_teams_users = resources.AsyncV3OrgsTeamsUsersResourceWithStreamingResponse(
-            client.v3_orgs_teams_users
-        )
-        self.v3_orgs = resources.AsyncV3OrgsResourceWithStreamingResponse(client.v3_orgs)
         self.roles = resources.AsyncRolesResourceWithStreamingResponse(client.roles)
         self.public_keys = resources.AsyncPublicKeysResourceWithStreamingResponse(client.public_keys)
         self.health = resources.AsyncHealthResourceWithStreamingResponse(client.health)
