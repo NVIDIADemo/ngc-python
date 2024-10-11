@@ -17,7 +17,10 @@ from ngc._response import (
     StreamedBinaryAPIResponse,
     AsyncStreamedBinaryAPIResponse,
 )
-from ngc.types.admin import OrgOrgOwnerBackfillResponse
+from ngc.types.admin import (
+    OrgValidateResponse,
+    OrgOrgOwnerBackfillResponse,
+)
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -613,6 +616,37 @@ class TestOrgs:
                 "",
             )
 
+    @parametrize
+    def test_method_validate(self, client: Ngc) -> None:
+        org = client.admin.orgs.validate(
+            invitation_token="invitation_token",
+        )
+        assert_matches_type(OrgValidateResponse, org, path=["response"])
+
+    @parametrize
+    def test_raw_response_validate(self, client: Ngc) -> None:
+        response = client.admin.orgs.with_raw_response.validate(
+            invitation_token="invitation_token",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        org = response.parse()
+        assert_matches_type(OrgValidateResponse, org, path=["response"])
+
+    @parametrize
+    def test_streaming_response_validate(self, client: Ngc) -> None:
+        with client.admin.orgs.with_streaming_response.validate(
+            invitation_token="invitation_token",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            org = response.parse()
+            assert_matches_type(OrgValidateResponse, org, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
 
 class TestAsyncOrgs:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
@@ -1206,3 +1240,34 @@ class TestAsyncOrgs:
             await async_client.admin.orgs.with_raw_response.org_owner_backfill(
                 "",
             )
+
+    @parametrize
+    async def test_method_validate(self, async_client: AsyncNgc) -> None:
+        org = await async_client.admin.orgs.validate(
+            invitation_token="invitation_token",
+        )
+        assert_matches_type(OrgValidateResponse, org, path=["response"])
+
+    @parametrize
+    async def test_raw_response_validate(self, async_client: AsyncNgc) -> None:
+        response = await async_client.admin.orgs.with_raw_response.validate(
+            invitation_token="invitation_token",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        org = await response.parse()
+        assert_matches_type(OrgValidateResponse, org, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_validate(self, async_client: AsyncNgc) -> None:
+        async with async_client.admin.orgs.with_streaming_response.validate(
+            invitation_token="invitation_token",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            org = await response.parse()
+            assert_matches_type(OrgValidateResponse, org, path=["response"])
+
+        assert cast(Any, response.is_closed) is True

@@ -1,5 +1,13 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+from .me import (
+    MeResource,
+    AsyncMeResource,
+    MeResourceWithRawResponse,
+    AsyncMeResourceWithRawResponse,
+    MeResourceWithStreamingResponse,
+    AsyncMeResourceWithStreamingResponse,
+)
 from .orgs import (
     OrgsResource,
     AsyncOrgsResource,
@@ -24,14 +32,6 @@ from .roles import (
     RolesResourceWithStreamingResponse,
     AsyncRolesResourceWithStreamingResponse,
 )
-from .users import (
-    UsersResource,
-    AsyncUsersResource,
-    UsersResourceWithRawResponse,
-    AsyncUsersResourceWithRawResponse,
-    UsersResourceWithStreamingResponse,
-    AsyncUsersResourceWithStreamingResponse,
-)
 from .health import (
     HealthResource,
     AsyncHealthResource,
@@ -39,14 +39,6 @@ from .health import (
     AsyncHealthResourceWithRawResponse,
     HealthResourceWithStreamingResponse,
     AsyncHealthResourceWithStreamingResponse,
-)
-from .v3_orgs import (
-    V3OrgsResource,
-    AsyncV3OrgsResource,
-    V3OrgsResourceWithRawResponse,
-    AsyncV3OrgsResourceWithRawResponse,
-    V3OrgsResourceWithStreamingResponse,
-    AsyncV3OrgsResourceWithStreamingResponse,
 )
 from .services import (
     ServicesResource,
@@ -64,14 +56,6 @@ from .public_keys import (
     PublicKeysResourceWithStreamingResponse,
     AsyncPublicKeysResourceWithStreamingResponse,
 )
-from .v3_orgs_users import (
-    V3OrgsUsersResource,
-    AsyncV3OrgsUsersResource,
-    V3OrgsUsersResourceWithRawResponse,
-    AsyncV3OrgsUsersResourceWithRawResponse,
-    V3OrgsUsersResourceWithStreamingResponse,
-    AsyncV3OrgsUsersResourceWithStreamingResponse,
-)
 from .users_management import (
     UsersManagementResource,
     AsyncUsersManagementResource,
@@ -88,14 +72,6 @@ from .swagger_resources import (
     SwaggerResourcesResourceWithStreamingResponse,
     AsyncSwaggerResourcesResourceWithStreamingResponse,
 )
-from .v3_orgs_teams_users import (
-    V3OrgsTeamsUsersResource,
-    AsyncV3OrgsTeamsUsersResource,
-    V3OrgsTeamsUsersResourceWithRawResponse,
-    AsyncV3OrgsTeamsUsersResourceWithRawResponse,
-    V3OrgsTeamsUsersResourceWithStreamingResponse,
-    AsyncV3OrgsTeamsUsersResourceWithStreamingResponse,
-)
 
 __all__ = [
     "OrgsResource",
@@ -104,12 +80,12 @@ __all__ = [
     "AsyncOrgsResourceWithRawResponse",
     "OrgsResourceWithStreamingResponse",
     "AsyncOrgsResourceWithStreamingResponse",
-    "UsersResource",
-    "AsyncUsersResource",
-    "UsersResourceWithRawResponse",
-    "AsyncUsersResourceWithRawResponse",
-    "UsersResourceWithStreamingResponse",
-    "AsyncUsersResourceWithStreamingResponse",
+    "MeResource",
+    "AsyncMeResource",
+    "MeResourceWithRawResponse",
+    "AsyncMeResourceWithRawResponse",
+    "MeResourceWithStreamingResponse",
+    "AsyncMeResourceWithStreamingResponse",
     "AdminResource",
     "AsyncAdminResource",
     "AdminResourceWithRawResponse",
@@ -128,24 +104,6 @@ __all__ = [
     "AsyncServicesResourceWithRawResponse",
     "ServicesResourceWithStreamingResponse",
     "AsyncServicesResourceWithStreamingResponse",
-    "V3OrgsUsersResource",
-    "AsyncV3OrgsUsersResource",
-    "V3OrgsUsersResourceWithRawResponse",
-    "AsyncV3OrgsUsersResourceWithRawResponse",
-    "V3OrgsUsersResourceWithStreamingResponse",
-    "AsyncV3OrgsUsersResourceWithStreamingResponse",
-    "V3OrgsTeamsUsersResource",
-    "AsyncV3OrgsTeamsUsersResource",
-    "V3OrgsTeamsUsersResourceWithRawResponse",
-    "AsyncV3OrgsTeamsUsersResourceWithRawResponse",
-    "V3OrgsTeamsUsersResourceWithStreamingResponse",
-    "AsyncV3OrgsTeamsUsersResourceWithStreamingResponse",
-    "V3OrgsResource",
-    "AsyncV3OrgsResource",
-    "V3OrgsResourceWithRawResponse",
-    "AsyncV3OrgsResourceWithRawResponse",
-    "V3OrgsResourceWithStreamingResponse",
-    "AsyncV3OrgsResourceWithStreamingResponse",
     "RolesResource",
     "AsyncRolesResource",
     "RolesResourceWithRawResponse",

@@ -6,6 +6,7 @@ from typing_extensions import Literal
 from pydantic import Field as FieldInfo
 
 from ..._models import BaseModel
+from ..shared.team import Team
 
 __all__ = [
     "UserListResponse",
@@ -20,9 +21,6 @@ __all__ = [
     "RoleOrgRepoScanSettings",
     "RoleOrgUsersInfo",
     "RoleTargetSystemUserIdentifier",
-    "RoleTeam",
-    "RoleTeamInfinityManagerSettings",
-    "RoleTeamRepoScanSettings",
     "StorageQuota",
     "UserMetadata",
 ]
@@ -255,58 +253,6 @@ class RoleTargetSystemUserIdentifier(BaseModel):
     """Unique ID of the user who submitted the job"""
 
 
-class RoleTeamInfinityManagerSettings(BaseModel):
-    infinity_manager_enabled: Optional[bool] = FieldInfo(alias="infinityManagerEnabled", default=None)
-    """Enable the infinity manager or not. Used both in org and team level object"""
-
-    infinity_manager_enable_team_override: Optional[bool] = FieldInfo(
-        alias="infinityManagerEnableTeamOverride", default=None
-    )
-    """Allow override settings at team level. Only used in org level object"""
-
-
-class RoleTeamRepoScanSettings(BaseModel):
-    repo_scan_allow_override: Optional[bool] = FieldInfo(alias="repoScanAllowOverride", default=None)
-    """Allow org admin to override the org level repo scan settings"""
-
-    repo_scan_by_default: Optional[bool] = FieldInfo(alias="repoScanByDefault", default=None)
-    """Allow repository scanning by default"""
-
-    repo_scan_enabled: Optional[bool] = FieldInfo(alias="repoScanEnabled", default=None)
-    """Enable the repository scan or not. Only used in org level object"""
-
-    repo_scan_enable_notifications: Optional[bool] = FieldInfo(alias="repoScanEnableNotifications", default=None)
-    """Sends notification to end user after scanning is done"""
-
-    repo_scan_enable_team_override: Optional[bool] = FieldInfo(alias="repoScanEnableTeamOverride", default=None)
-    """Allow override settings at team level. Only used in org level object"""
-
-    repo_scan_show_results: Optional[bool] = FieldInfo(alias="repoScanShowResults", default=None)
-    """Allow showing scan results to CLI or UI"""
-
-
-class RoleTeam(BaseModel):
-    id: Optional[int] = None
-    """unique Id of this team."""
-
-    description: Optional[str] = None
-    """description of the team"""
-
-    infinity_manager_settings: Optional[RoleTeamInfinityManagerSettings] = FieldInfo(
-        alias="infinityManagerSettings", default=None
-    )
-    """Infinity manager setting definition"""
-
-    is_deleted: Optional[bool] = FieldInfo(alias="isDeleted", default=None)
-    """indicates if the team is deleted or not"""
-
-    name: Optional[str] = None
-    """team name"""
-
-    repo_scan_settings: Optional[RoleTeamRepoScanSettings] = FieldInfo(alias="repoScanSettings", default=None)
-    """Repo scan setting definition"""
-
-
 class Role(BaseModel):
     org: Optional[RoleOrg] = None
     """Information about the Organization"""
@@ -322,7 +268,7 @@ class Role(BaseModel):
     )
     """Information about the user who is attempting to run the job"""
 
-    team: Optional[RoleTeam] = None
+    team: Optional[Team] = None
     """Information about the team"""
 
     team_roles: Optional[List[str]] = FieldInfo(alias="teamRoles", default=None)

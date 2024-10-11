@@ -45,8 +45,9 @@ from ...._response import (
     async_to_custom_raw_response_wrapper,
     async_to_custom_streamed_response_wrapper,
 )
-from ....types.admin import org_create_params, org_enable_params, org_update_params
+from ....types.admin import org_create_params, org_enable_params, org_update_params, org_validate_params
 from ...._base_client import make_request_options
+from ....types.admin.org_validate_response import OrgValidateResponse
 from ....types.admin.org_org_owner_backfill_response import OrgOrgOwnerBackfillResponse
 
 __all__ = ["OrgsResource", "AsyncOrgsResource"]
@@ -425,6 +426,43 @@ class OrgsResource(SyncAPIResource):
             cast_to=OrgOrgOwnerBackfillResponse,
         )
 
+    def validate(
+        self,
+        *,
+        invitation_token: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> OrgValidateResponse:
+        """
+        Validate org creation from proto org
+
+        Args:
+          invitation_token: JWT that contains org owner email and proto org identifier
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._get(
+            "/v3/orgs/proto-org/validate",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform({"invitation_token": invitation_token}, org_validate_params.OrgValidateParams),
+            ),
+            cast_to=OrgValidateResponse,
+        )
+
 
 class AsyncOrgsResource(AsyncAPIResource):
     @cached_property
@@ -799,6 +837,45 @@ class AsyncOrgsResource(AsyncAPIResource):
             cast_to=OrgOrgOwnerBackfillResponse,
         )
 
+    async def validate(
+        self,
+        *,
+        invitation_token: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> OrgValidateResponse:
+        """
+        Validate org creation from proto org
+
+        Args:
+          invitation_token: JWT that contains org owner email and proto org identifier
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._get(
+            "/v3/orgs/proto-org/validate",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {"invitation_token": invitation_token}, org_validate_params.OrgValidateParams
+                ),
+            ),
+            cast_to=OrgValidateResponse,
+        )
+
 
 class OrgsResourceWithRawResponse:
     def __init__(self, orgs: OrgsResource) -> None:
@@ -826,6 +903,9 @@ class OrgsResourceWithRawResponse:
         )
         self.org_owner_backfill = to_raw_response_wrapper(
             orgs.org_owner_backfill,
+        )
+        self.validate = to_raw_response_wrapper(
+            orgs.validate,
         )
 
     @cached_property
@@ -864,6 +944,9 @@ class AsyncOrgsResourceWithRawResponse:
         self.org_owner_backfill = async_to_raw_response_wrapper(
             orgs.org_owner_backfill,
         )
+        self.validate = async_to_raw_response_wrapper(
+            orgs.validate,
+        )
 
     @cached_property
     def users(self) -> AsyncUsersResourceWithRawResponse:
@@ -901,6 +984,9 @@ class OrgsResourceWithStreamingResponse:
         self.org_owner_backfill = to_streamed_response_wrapper(
             orgs.org_owner_backfill,
         )
+        self.validate = to_streamed_response_wrapper(
+            orgs.validate,
+        )
 
     @cached_property
     def users(self) -> UsersResourceWithStreamingResponse:
@@ -937,6 +1023,9 @@ class AsyncOrgsResourceWithStreamingResponse:
         )
         self.org_owner_backfill = async_to_streamed_response_wrapper(
             orgs.org_owner_backfill,
+        )
+        self.validate = async_to_streamed_response_wrapper(
+            orgs.validate,
         )
 
     @cached_property
