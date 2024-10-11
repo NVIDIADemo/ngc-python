@@ -5,7 +5,6 @@ from __future__ import annotations
 from .credits_history import CreditsHistory as CreditsHistory
 from .team_list_params import TeamListParams as TeamListParams
 from .user_list_params import UserListParams as UserListParams
-from .team_list_response import TeamListResponse as TeamListResponse
 from .user_create_params import UserCreateParams as UserCreateParams
 from .user_delete_params import UserDeleteParams as UserDeleteParams
 from .user_list_response import UserListResponse as UserListResponse
