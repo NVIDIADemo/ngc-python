@@ -140,7 +140,9 @@ from ngc.types.me import UserKeyResponse
 
 Methods:
 
-- <code title="post /v2/users/me/api-key">client.me.api_key.<a href="./src/ngc/resources/me/api_key.py">create</a>() -> <a href="./src/ngc/types/me/user_key_response.py">UserKeyResponse</a></code>
+- <code title="get /v2/users/me">client.me.api_key.<a href="./src/ngc/resources/me/api_key.py">retrieve</a>(\*\*<a href="src/ngc/types/me/api_key_retrieve_params.py">params</a>) -> <a href="./src/ngc/types/shared/user.py">User</a></code>
+- <code title="patch /v2/users/me">client.me.api_key.<a href="./src/ngc/resources/me/api_key.py">update</a>(\*\*<a href="src/ngc/types/me/api_key_update_params.py">params</a>) -> <a href="./src/ngc/types/shared/user.py">User</a></code>
+- <code title="post /v2/users/me/api-key">client.me.api_key.<a href="./src/ngc/resources/me/api_key.py">create_api_key</a>() -> <a href="./src/ngc/types/me/user_key_response.py">UserKeyResponse</a></code>
 
 # Admin
 
@@ -210,15 +212,6 @@ Methods:
 
 - <code title="post /v2/admin/users/{id}/crm-sync">client.admin.users.<a href="./src/ngc/resources/admin/users.py">crm_sync</a>(id) -> <a href="./src/ngc/types/admin/user_crm_sync_response.py">UserCRMSyncResponse</a></code>
 - <code title="post /v2/admin/users/{id}/migrate-deprecated-roles">client.admin.users.<a href="./src/ngc/resources/admin/users.py">migrate_deprecated_roles</a>(id) -> <a href="./src/ngc/types/shared/user.py">User</a></code>
-
-# UsersManagement
-
-## Me
-
-Methods:
-
-- <code title="get /v2/users/me">client.users_management.me.<a href="./src/ngc/resources/users_management/me.py">retrieve</a>(\*\*<a href="src/ngc/types/users_management/me_retrieve_params.py">params</a>) -> <a href="./src/ngc/types/shared/user.py">User</a></code>
-- <code title="patch /v2/users/me">client.users_management.me.<a href="./src/ngc/resources/users_management/me.py">update</a>(\*\*<a href="src/ngc/types/users_management/me_update_params.py">params</a>) -> <a href="./src/ngc/types/shared/user.py">User</a></code>
 
 # Services
 

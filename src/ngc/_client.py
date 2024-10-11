@@ -49,7 +49,6 @@ class Ngc(SyncAPIClient):
     orgs: resources.OrgsResource
     me: resources.MeResource
     admin: resources.AdminResource
-    users_management: resources.UsersManagementResource
     services: resources.ServicesResource
     roles: resources.RolesResource
     public_keys: resources.PublicKeysResource
@@ -115,7 +114,6 @@ class Ngc(SyncAPIClient):
         self.orgs = resources.OrgsResource(self)
         self.me = resources.MeResource(self)
         self.admin = resources.AdminResource(self)
-        self.users_management = resources.UsersManagementResource(self)
         self.services = resources.ServicesResource(self)
         self.roles = resources.RolesResource(self)
         self.public_keys = resources.PublicKeysResource(self)
@@ -233,7 +231,6 @@ class AsyncNgc(AsyncAPIClient):
     orgs: resources.AsyncOrgsResource
     me: resources.AsyncMeResource
     admin: resources.AsyncAdminResource
-    users_management: resources.AsyncUsersManagementResource
     services: resources.AsyncServicesResource
     roles: resources.AsyncRolesResource
     public_keys: resources.AsyncPublicKeysResource
@@ -299,7 +296,6 @@ class AsyncNgc(AsyncAPIClient):
         self.orgs = resources.AsyncOrgsResource(self)
         self.me = resources.AsyncMeResource(self)
         self.admin = resources.AsyncAdminResource(self)
-        self.users_management = resources.AsyncUsersManagementResource(self)
         self.services = resources.AsyncServicesResource(self)
         self.roles = resources.AsyncRolesResource(self)
         self.public_keys = resources.AsyncPublicKeysResource(self)
@@ -418,7 +414,6 @@ class NgcWithRawResponse:
         self.orgs = resources.OrgsResourceWithRawResponse(client.orgs)
         self.me = resources.MeResourceWithRawResponse(client.me)
         self.admin = resources.AdminResourceWithRawResponse(client.admin)
-        self.users_management = resources.UsersManagementResourceWithRawResponse(client.users_management)
         self.services = resources.ServicesResourceWithRawResponse(client.services)
         self.roles = resources.RolesResourceWithRawResponse(client.roles)
         self.public_keys = resources.PublicKeysResourceWithRawResponse(client.public_keys)
@@ -431,7 +426,6 @@ class AsyncNgcWithRawResponse:
         self.orgs = resources.AsyncOrgsResourceWithRawResponse(client.orgs)
         self.me = resources.AsyncMeResourceWithRawResponse(client.me)
         self.admin = resources.AsyncAdminResourceWithRawResponse(client.admin)
-        self.users_management = resources.AsyncUsersManagementResourceWithRawResponse(client.users_management)
         self.services = resources.AsyncServicesResourceWithRawResponse(client.services)
         self.roles = resources.AsyncRolesResourceWithRawResponse(client.roles)
         self.public_keys = resources.AsyncPublicKeysResourceWithRawResponse(client.public_keys)
@@ -444,7 +438,6 @@ class NgcWithStreamedResponse:
         self.orgs = resources.OrgsResourceWithStreamingResponse(client.orgs)
         self.me = resources.MeResourceWithStreamingResponse(client.me)
         self.admin = resources.AdminResourceWithStreamingResponse(client.admin)
-        self.users_management = resources.UsersManagementResourceWithStreamingResponse(client.users_management)
         self.services = resources.ServicesResourceWithStreamingResponse(client.services)
         self.roles = resources.RolesResourceWithStreamingResponse(client.roles)
         self.public_keys = resources.PublicKeysResourceWithStreamingResponse(client.public_keys)
@@ -457,7 +450,6 @@ class AsyncNgcWithStreamedResponse:
         self.orgs = resources.AsyncOrgsResourceWithStreamingResponse(client.orgs)
         self.me = resources.AsyncMeResourceWithStreamingResponse(client.me)
         self.admin = resources.AsyncAdminResourceWithStreamingResponse(client.admin)
-        self.users_management = resources.AsyncUsersManagementResourceWithStreamingResponse(client.users_management)
         self.services = resources.AsyncServicesResourceWithStreamingResponse(client.services)
         self.roles = resources.AsyncRolesResourceWithStreamingResponse(client.roles)
         self.public_keys = resources.AsyncPublicKeysResourceWithStreamingResponse(client.public_keys)

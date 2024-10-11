@@ -56,14 +56,6 @@ from .public_keys import (
     PublicKeysResourceWithStreamingResponse,
     AsyncPublicKeysResourceWithStreamingResponse,
 )
-from .users_management import (
-    UsersManagementResource,
-    AsyncUsersManagementResource,
-    UsersManagementResourceWithRawResponse,
-    AsyncUsersManagementResourceWithRawResponse,
-    UsersManagementResourceWithStreamingResponse,
-    AsyncUsersManagementResourceWithStreamingResponse,
-)
 from .swagger_resources import (
     SwaggerResourcesResource,
     AsyncSwaggerResourcesResource,
@@ -92,12 +84,6 @@ __all__ = [
     "AsyncAdminResourceWithRawResponse",
     "AdminResourceWithStreamingResponse",
     "AsyncAdminResourceWithStreamingResponse",
-    "UsersManagementResource",
-    "AsyncUsersManagementResource",
-    "UsersManagementResourceWithRawResponse",
-    "AsyncUsersManagementResourceWithRawResponse",
-    "UsersManagementResourceWithStreamingResponse",
-    "AsyncUsersManagementResourceWithStreamingResponse",
     "ServicesResource",
     "AsyncServicesResource",
     "ServicesResourceWithRawResponse",
