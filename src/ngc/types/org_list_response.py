@@ -1,0 +1,225 @@
+# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+from typing import List, Optional
+from typing_extensions import Literal
+
+from pydantic import Field as FieldInfo
+
+from .._models import BaseModel
+
+__all__ = [
+    "OrgListResponse",
+    "AlternateContact",
+    "InfinityManagerSettings",
+    "OrgOwner",
+    "ProductEnablement",
+    "ProductEnablementPoDetail",
+    "ProductSubscription",
+    "RepoScanSettings",
+    "UsersInfo",
+]
+
+
+class AlternateContact(BaseModel):
+    email: Optional[str] = None
+    """Alternate contact's email."""
+
+    full_name: Optional[str] = FieldInfo(alias="fullName", default=None)
+    """Full name of the alternate contact."""
+
+
+class InfinityManagerSettings(BaseModel):
+    infinity_manager_enabled: Optional[bool] = FieldInfo(alias="infinityManagerEnabled", default=None)
+    """Enable the infinity manager or not. Used both in org and team level object"""
+
+    infinity_manager_enable_team_override: Optional[bool] = FieldInfo(
+        alias="infinityManagerEnableTeamOverride", default=None
+    )
+    """Allow override settings at team level. Only used in org level object"""
+
+
+class OrgOwner(BaseModel):
+    email: str
+    """Email address of the org owner."""
+
+    full_name: str = FieldInfo(alias="fullName")
+    """Org owner name."""
+
+    last_login_date: Optional[str] = FieldInfo(alias="lastLoginDate", default=None)
+    """Last time the org owner logged in."""
+
+
+class ProductEnablementPoDetail(BaseModel):
+    entitlement_id: Optional[str] = FieldInfo(alias="entitlementId", default=None)
+    """Entitlement identifier."""
+
+    pk_id: Optional[str] = FieldInfo(alias="pkId", default=None)
+    """PAK (Product Activation Key) identifier."""
+
+
+class ProductEnablement(BaseModel):
+    product_name: str = FieldInfo(alias="productName")
+    """Product Name (NVAIE, BASE_COMMAND, REGISTRY, etc)"""
+
+    type: Literal[
+        "NGC_ADMIN_EVAL",
+        "NGC_ADMIN_NFR",
+        "NGC_ADMIN_COMMERCIAL",
+        "EMS_EVAL",
+        "EMS_NFR",
+        "EMS_COMMERCIAL",
+        "NGC_ADMIN_DEVELOPER",
+    ]
+    """Product Enablement Types"""
+
+    expiration_date: Optional[str] = FieldInfo(alias="expirationDate", default=None)
+    """Date on which the subscription expires.
+
+    The subscription is invalid after this date. (yyyy-MM-dd)
+    """
+
+    po_details: Optional[List[ProductEnablementPoDetail]] = FieldInfo(alias="poDetails", default=None)
+
+
+class ProductSubscription(BaseModel):
+    product_name: str = FieldInfo(alias="productName")
+    """Product Name (NVAIE, BASE_COMMAND, FleetCommand, REGISTRY, etc)."""
+
+    id: Optional[str] = None
+    """Unique entitlement identifier"""
+
+    ems_entitlement_type: Optional[Literal["EMS_EVAL", "EMS_NFR", "EMS_COMMERICAL", "EMS_COMMERCIAL"]] = FieldInfo(
+        alias="emsEntitlementType", default=None
+    )
+    """EMS Subscription type. (options: EMS_EVAL, EMS_NFR and EMS_COMMERCIAL)"""
+
+    expiration_date: Optional[str] = FieldInfo(alias="expirationDate", default=None)
+    """Date on which the subscription expires.
+
+    The subscription is invalid after this date. (yyyy-MM-dd)
+    """
+
+    start_date: Optional[str] = FieldInfo(alias="startDate", default=None)
+    """Date on which the subscription becomes active. (yyyy-MM-dd)"""
+
+    type: Optional[Literal["NGC_ADMIN_EVAL", "NGC_ADMIN_NFR", "NGC_ADMIN_COMMERCIAL"]] = None
+    """Subscription type.
+
+    (options: NGC_ADMIN_EVAL, NGC_ADMIN_NFR, NGC_ADMIN_COMMERCIAL)
+    """
+
+
+class RepoScanSettings(BaseModel):
+    repo_scan_allow_override: Optional[bool] = FieldInfo(alias="repoScanAllowOverride", default=None)
+    """Allow org admin to override the org level repo scan settings"""
+
+    repo_scan_by_default: Optional[bool] = FieldInfo(alias="repoScanByDefault", default=None)
+    """Allow repository scanning by default"""
+
+    repo_scan_enabled: Optional[bool] = FieldInfo(alias="repoScanEnabled", default=None)
+    """Enable the repository scan or not. Only used in org level object"""
+
+    repo_scan_enable_notifications: Optional[bool] = FieldInfo(alias="repoScanEnableNotifications", default=None)
+    """Sends notification to end user after scanning is done"""
+
+    repo_scan_enable_team_override: Optional[bool] = FieldInfo(alias="repoScanEnableTeamOverride", default=None)
+    """Allow override settings at team level. Only used in org level object"""
+
+    repo_scan_show_results: Optional[bool] = FieldInfo(alias="repoScanShowResults", default=None)
+    """Allow showing scan results to CLI or UI"""
+
+
+class UsersInfo(BaseModel):
+    total_users: Optional[int] = FieldInfo(alias="totalUsers", default=None)
+    """Total number of users."""
+
+
+class OrgListResponse(BaseModel):
+    id: Optional[int] = None
+    """Unique Id of this team."""
+
+    alternate_contact: Optional[AlternateContact] = FieldInfo(alias="alternateContact", default=None)
+    """Org Owner Alternate Contact"""
+
+    billing_account_id: Optional[str] = FieldInfo(alias="billingAccountId", default=None)
+    """Billing account ID."""
+
+    can_add_on: Optional[bool] = FieldInfo(alias="canAddOn", default=None)
+    """Identifies if the org can be reused."""
+
+    country: Optional[str] = None
+    """ISO country code of the organization."""
+
+    description: Optional[str] = None
+    """Optional description of the organization."""
+
+    display_name: Optional[str] = FieldInfo(alias="displayName", default=None)
+    """Name of the organization that will be shown to users."""
+
+    idp_id: Optional[str] = FieldInfo(alias="idpId", default=None)
+    """Identity Provider ID."""
+
+    industry: Optional[str] = None
+    """Industry of the organization."""
+
+    infinity_manager_settings: Optional[InfinityManagerSettings] = FieldInfo(
+        alias="infinityManagerSettings", default=None
+    )
+    """Infinity manager setting definition"""
+
+    is_dataset_service_enabled: Optional[bool] = FieldInfo(alias="isDatasetServiceEnabled", default=None)
+    """Dataset Service enable flag for an organization"""
+
+    is_internal: Optional[bool] = FieldInfo(alias="isInternal", default=None)
+    """Is NVIDIA internal org or not"""
+
+    is_proto: Optional[bool] = FieldInfo(alias="isProto", default=None)
+    """Indicates when the org is a proto org"""
+
+    is_quick_start_enabled: Optional[bool] = FieldInfo(alias="isQuickStartEnabled", default=None)
+    """Quick Start enable flag for an organization"""
+
+    is_registry_sse_enabled: Optional[bool] = FieldInfo(alias="isRegistrySSEEnabled", default=None)
+    """If a server side encryption is enabled for private registry (models, resources)"""
+
+    is_secrets_manager_service_enabled: Optional[bool] = FieldInfo(alias="isSecretsManagerServiceEnabled", default=None)
+    """Secrets Manager Service enable flag for an organization"""
+
+    is_secure_credential_sharing_service_enabled: Optional[bool] = FieldInfo(
+        alias="isSecureCredentialSharingServiceEnabled", default=None
+    )
+    """Secure Credential Sharing Service enable flag for an organization"""
+
+    is_separate_influx_db_used: Optional[bool] = FieldInfo(alias="isSeparateInfluxDbUsed", default=None)
+    """If a separate influx db used for an organization in BCP for job telemetry"""
+
+    name: Optional[str] = None
+    """Organization name."""
+
+    nan: Optional[str] = None
+    """NVIDIA Cloud Account Number."""
+
+    org_owner: Optional[OrgOwner] = FieldInfo(alias="orgOwner", default=None)
+    """Org owner."""
+
+    org_owners: Optional[List[OrgOwner]] = FieldInfo(alias="orgOwners", default=None)
+    """Org owners"""
+
+    pec_sfdc_id: Optional[str] = FieldInfo(alias="pecSfdcId", default=None)
+    """Product end customer salesforce.com Id (external customer Id).
+
+    pecSfdcId is for EMS (entitlement management service) to track external paid
+    customer.
+    """
+
+    product_enablements: Optional[List[ProductEnablement]] = FieldInfo(alias="productEnablements", default=None)
+
+    product_subscriptions: Optional[List[ProductSubscription]] = FieldInfo(alias="productSubscriptions", default=None)
+
+    repo_scan_settings: Optional[RepoScanSettings] = FieldInfo(alias="repoScanSettings", default=None)
+    """Repo scan setting definition"""
+
+    type: Optional[Literal["UNKNOWN", "CLOUD", "ENTERPRISE", "INDIVIDUAL"]] = None
+
+    users_info: Optional[UsersInfo] = FieldInfo(alias="usersInfo", default=None)
+    """Users information."""
