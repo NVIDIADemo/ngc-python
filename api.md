@@ -1,7 +1,7 @@
 # Shared Types
 
 ```python
-from ngc.types import Health, MeteringResultList, TeamList, User, UserInvitationList, UserList
+from ngc.types import Health, MeteringResultList, Team, TeamList, User, UserInvitationList, UserList
 ```
 
 # Orgs
@@ -47,12 +47,12 @@ Methods:
 Types:
 
 ```python
-from ngc.types.orgs import TeamResponse, TeamListResponse
+from ngc.types.orgs import TeamResponse
 ```
 
 Methods:
 
-- <code title="get /v2/org/{org-name}/teams">client.orgs.teams.<a href="./src/ngc/resources/orgs/teams/teams.py">list</a>(org_name, \*\*<a href="src/ngc/types/orgs/team_list_params.py">params</a>) -> <a href="./src/ngc/types/orgs/team_list_response.py">SyncPageNumberTeams[TeamListResponse]</a></code>
+- <code title="get /v2/org/{org-name}/teams">client.orgs.teams.<a href="./src/ngc/resources/orgs/teams/teams.py">list</a>(org_name, \*\*<a href="src/ngc/types/orgs/team_list_params.py">params</a>) -> <a href="./src/ngc/types/shared/team.py">SyncPageNumberTeams[Team]</a></code>
 
 ### Users
 
@@ -128,60 +128,64 @@ Methods:
 
 - <code title="get /v2/org/{org-name}/auditLogs/{log-id}">client.orgs.audit_logs.<a href="./src/ngc/resources/orgs/audit_logs.py">retrieve</a>(log_id, \*, org_name) -> <a href="./src/ngc/types/orgs/audit_logs_presigned_url.py">AuditLogsPresignedURL</a></code>
 
-# Users
+# Me
 
-## V2
-
-### APIKey
+## APIKey
 
 Types:
 
 ```python
-from ngc.types.users.v2 import UserKeyResponse
+from ngc.types.me import UserKeyResponse
 ```
 
 Methods:
 
-- <code title="post /v2/users/me/api-key">client.users.v2.api_key.<a href="./src/ngc/resources/users/v2/api_key.py">create</a>() -> <a href="./src/ngc/types/users/v2/user_key_response.py">UserKeyResponse</a></code>
+- <code title="get /v2/users/me">client.me.api_key.<a href="./src/ngc/resources/me/api_key.py">retrieve</a>(\*\*<a href="src/ngc/types/me/api_key_retrieve_params.py">params</a>) -> <a href="./src/ngc/types/shared/user.py">User</a></code>
+- <code title="patch /v2/users/me">client.me.api_key.<a href="./src/ngc/resources/me/api_key.py">update</a>(\*\*<a href="src/ngc/types/me/api_key_update_params.py">params</a>) -> <a href="./src/ngc/types/shared/user.py">User</a></code>
+- <code title="post /v2/users/me/api-key">client.me.api_key.<a href="./src/ngc/resources/me/api_key.py">create_api_key</a>() -> <a href="./src/ngc/types/me/user_key_response.py">UserKeyResponse</a></code>
 
-# SuperAdminUser
+# Admin
 
-Types:
-
-```python
-from ngc.types import SuperAdminUserCRMSyncResponse
-```
+## Entitlements
 
 Methods:
 
-- <code title="post /v2/admin/users/{id}/crm-sync">client.super_admin_user.<a href="./src/ngc/resources/super_admin_user/super_admin_user.py">crm_sync</a>(id) -> <a href="./src/ngc/types/super_admin_user_crm_sync_response.py">SuperAdminUserCRMSyncResponse</a></code>
-- <code title="post /v2/admin/users/{id}/migrate-deprecated-roles">client.super_admin_user.<a href="./src/ngc/resources/super_admin_user/super_admin_user.py">migrate_deprecated_roles</a>(id) -> <a href="./src/ngc/types/shared/user.py">User</a></code>
+- <code title="get /v2/admin/entitlements">client.admin.entitlements.<a href="./src/ngc/resources/admin/entitlements.py">retrieve_all</a>(\*\*<a href="src/ngc/types/admin/entitlement_retrieve_all_params.py">params</a>) -> BinaryAPIResponse</code>
 
 ## Orgs
 
 Types:
 
 ```python
-from ngc.types.super_admin_user import OrgOrgOwnerBackfillResponse
+from ngc.types.admin import OrgOrgOwnerBackfillResponse, OrgValidateResponse
 ```
 
 Methods:
 
-- <code title="post /v2/admin/org/{org-name}/org-owner-backfill">client.super_admin_user.orgs.<a href="./src/ngc/resources/super_admin_user/orgs/orgs.py">org_owner_backfill</a>(org_name) -> <a href="./src/ngc/types/super_admin_user/org_org_owner_backfill_response.py">OrgOrgOwnerBackfillResponse</a></code>
+- <code title="post /v2/admin/orgs">client.admin.orgs.<a href="./src/ngc/resources/admin/orgs/orgs.py">create</a>(\*\*<a href="src/ngc/types/admin/org_create_params.py">params</a>) -> BinaryAPIResponse</code>
+- <code title="get /v3/admin/org/{org-name}">client.admin.orgs.<a href="./src/ngc/resources/admin/orgs/orgs.py">retrieve</a>(org_name) -> BinaryAPIResponse</code>
+- <code title="patch /v3/admin/org/{org-name}">client.admin.orgs.<a href="./src/ngc/resources/admin/orgs/orgs.py">update</a>(org_name, \*\*<a href="src/ngc/types/admin/org_update_params.py">params</a>) -> BinaryAPIResponse</code>
+- <code title="post /v2/admin/backfill-orgs-to-kratos">client.admin.orgs.<a href="./src/ngc/resources/admin/orgs/orgs.py">backfill_orgs_to_kratos</a>() -> BinaryAPIResponse</code>
+- <code title="post /v2/admin/org/{org-name}/enablement">client.admin.orgs.<a href="./src/ngc/resources/admin/orgs/orgs.py">enable</a>(org_name, \*\*<a href="src/ngc/types/admin/org_enable_params.py">params</a>) -> BinaryAPIResponse</code>
+- <code title="post /v2/admin/org/{org-name}/org-owner-backfill">client.admin.orgs.<a href="./src/ngc/resources/admin/orgs/orgs.py">org_owner_backfill</a>(org_name) -> <a href="./src/ngc/types/admin/org_org_owner_backfill_response.py">OrgOrgOwnerBackfillResponse</a></code>
+- <code title="get /v3/orgs/proto-org/validate">client.admin.orgs.<a href="./src/ngc/resources/admin/orgs/orgs.py">validate</a>(\*\*<a href="src/ngc/types/admin/org_validate_params.py">params</a>) -> <a href="./src/ngc/types/admin/org_validate_response.py">OrgValidateResponse</a></code>
 
 ### Users
 
 Types:
 
 ```python
-from ngc.types.super_admin_user.orgs import UserRemoveResponse
+from ngc.types.admin.orgs import UserRemoveResponse
 ```
 
 Methods:
 
-- <code title="post /v2/admin/org/{org-name}/users">client.super_admin_user.orgs.users.<a href="./src/ngc/resources/super_admin_user/orgs/users.py">create</a>(org_name, \*\*<a href="src/ngc/types/super_admin_user/orgs/user_create_params.py">params</a>) -> <a href="./src/ngc/types/shared/user.py">User</a></code>
-- <code title="post /v2/admin/org/{org-name}/users/{id}">client.super_admin_user.orgs.users.<a href="./src/ngc/resources/super_admin_user/orgs/users.py">add</a>(id, \*, org_name, \*\*<a href="src/ngc/types/super_admin_user/orgs/user_add_params.py">params</a>) -> <a href="./src/ngc/types/shared/user.py">User</a></code>
-- <code title="delete /v2/admin/org/{org-name}/users/{id}">client.super_admin_user.orgs.users.<a href="./src/ngc/resources/super_admin_user/orgs/users.py">remove</a>(id, \*, org_name) -> <a href="./src/ngc/types/super_admin_user/orgs/user_remove_response.py">UserRemoveResponse</a></code>
+- <code title="post /v2/admin/org/{org-name}/users">client.admin.orgs.users.<a href="./src/ngc/resources/admin/orgs/users.py">create</a>(org_name, \*\*<a href="src/ngc/types/admin/orgs/user_create_params.py">params</a>) -> <a href="./src/ngc/types/shared/user.py">User</a></code>
+- <code title="get /v3/orgs/{org-name}/users/{user-email-or-id}">client.admin.orgs.users.<a href="./src/ngc/resources/admin/orgs/users.py">retrieve</a>(user_email_or_id, \*, org_name) -> <a href="./src/ngc/types/shared/user.py">User</a></code>
+- <code title="post /v2/admin/org/{org-name}/users/{id}">client.admin.orgs.users.<a href="./src/ngc/resources/admin/orgs/users.py">add</a>(id, \*, org_name, \*\*<a href="src/ngc/types/admin/orgs/user_add_params.py">params</a>) -> <a href="./src/ngc/types/shared/user.py">User</a></code>
+- <code title="patch /v2/admin/org/{org-name}/users/{id}/add-role">client.admin.orgs.users.<a href="./src/ngc/resources/admin/orgs/users.py">add_role</a>(id, \*, org_name, \*\*<a href="src/ngc/types/admin/orgs/user_add_role_params.py">params</a>) -> <a href="./src/ngc/types/shared/user.py">User</a></code>
+- <code title="get /v2/admin/org/{org-name}/entitlements">client.admin.orgs.users.<a href="./src/ngc/resources/admin/orgs/users.py">get_entitlements</a>(org_name, \*\*<a href="src/ngc/types/admin/orgs/user_get_entitlements_params.py">params</a>) -> BinaryAPIResponse</code>
+- <code title="delete /v2/admin/org/{org-name}/users/{id}">client.admin.orgs.users.<a href="./src/ngc/resources/admin/orgs/users.py">remove</a>(id, \*, org_name) -> <a href="./src/ngc/types/admin/orgs/user_remove_response.py">UserRemoveResponse</a></code>
 
 ### Teams
 
@@ -189,73 +193,25 @@ Methods:
 
 Methods:
 
-- <code title="post /v2/admin/org/{org-name}/team/{team-name}/users">client.super_admin_user.orgs.teams.users.<a href="./src/ngc/resources/super_admin_user/orgs/teams/users.py">create</a>(team_name, \*, org_name, \*\*<a href="src/ngc/types/super_admin_user/orgs/teams/user_create_params.py">params</a>) -> <a href="./src/ngc/types/shared/user.py">User</a></code>
-- <code title="post /v2/admin/org/{org-name}/team/{team-name}/users/{id}">client.super_admin_user.orgs.teams.users.<a href="./src/ngc/resources/super_admin_user/orgs/teams/users.py">add</a>(id, \*, org_name, team_name, \*\*<a href="src/ngc/types/super_admin_user/orgs/teams/user_add_params.py">params</a>) -> <a href="./src/ngc/types/shared/user.py">User</a></code>
+- <code title="post /v2/admin/org/{org-name}/team/{team-name}/users">client.admin.orgs.teams.users.<a href="./src/ngc/resources/admin/orgs/teams/users.py">create</a>(team_name, \*, org_name, \*\*<a href="src/ngc/types/admin/orgs/teams/user_create_params.py">params</a>) -> <a href="./src/ngc/types/shared/user.py">User</a></code>
+- <code title="get /v2/admin/org/{org-name}/teams/{team-name}">client.admin.orgs.teams.users.<a href="./src/ngc/resources/admin/orgs/teams/users.py">retrieve</a>(team_name, \*, org_name) -> BinaryAPIResponse</code>
+- <code title="patch /v2/admin/org/{org-name}/teams/{team-name}">client.admin.orgs.teams.users.<a href="./src/ngc/resources/admin/orgs/teams/users.py">update</a>(team_name, \*, org_name, \*\*<a href="src/ngc/types/admin/orgs/teams/user_update_params.py">params</a>) -> BinaryAPIResponse</code>
+- <code title="post /v2/admin/org/{org-name}/team/{team-name}/users/{id}">client.admin.orgs.teams.users.<a href="./src/ngc/resources/admin/orgs/teams/users.py">add</a>(id, \*, org_name, team_name, \*\*<a href="src/ngc/types/admin/orgs/teams/user_add_params.py">params</a>) -> <a href="./src/ngc/types/shared/user.py">User</a></code>
+- <code title="patch /v2/admin/org/{org-name}/team/{team-name}/users/{id}/add-role">client.admin.orgs.teams.users.<a href="./src/ngc/resources/admin/orgs/teams/users.py">add_role</a>(id, \*, org_name, team_name, \*\*<a href="src/ngc/types/admin/orgs/teams/user_add_role_params.py">params</a>) -> <a href="./src/ngc/types/shared/user.py">User</a></code>
+- <code title="get /v3/orgs/{org-name}/teams/{team-name}/users/{user-email-or-id}">client.admin.orgs.teams.users.<a href="./src/ngc/resources/admin/orgs/teams/users.py">retrieve_user</a>(user_email_or_id, \*, org_name, team_name) -> <a href="./src/ngc/types/shared/user.py">User</a></code>
 
-# SuperAdminOrg
+## Users
 
-Methods:
+Types:
 
-- <code title="post /v2/admin/orgs">client.super_admin_org.<a href="./src/ngc/resources/super_admin_org/super_admin_org.py">create</a>(\*\*<a href="src/ngc/types/super_admin_org_create_params.py">params</a>) -> BinaryAPIResponse</code>
-
-## OrgStatus
-
-Methods:
-
-- <code title="post /v2/admin/org/{org-name}/enablement">client.super_admin_org.org_status.<a href="./src/ngc/resources/super_admin_org/org_status.py">create</a>(org_name, \*\*<a href="src/ngc/types/super_admin_org/org_status_create_params.py">params</a>) -> BinaryAPIResponse</code>
-
-# SuperAdminOrgControllers
+```python
+from ngc.types.admin import UserCRMSyncResponse
+```
 
 Methods:
 
-- <code title="post /v2/admin/backfill-orgs-to-kratos">client.super_admin_org_controllers.<a href="./src/ngc/resources/super_admin_org_controllers/super_admin_org_controllers.py">backfill_orgs_to_kratos</a>() -> BinaryAPIResponse</code>
-
-## Org
-
-Methods:
-
-- <code title="get /v3/admin/org/{org-name}">client.super_admin_org_controllers.org.<a href="./src/ngc/resources/super_admin_org_controllers/org.py">retrieve</a>(org_name) -> BinaryAPIResponse</code>
-- <code title="patch /v3/admin/org/{org-name}">client.super_admin_org_controllers.org.<a href="./src/ngc/resources/super_admin_org_controllers/org.py">update</a>(org_name, \*\*<a href="src/ngc/types/super_admin_org_controllers/org_update_params.py">params</a>) -> BinaryAPIResponse</code>
-
-# UsersManagement
-
-## Me
-
-Methods:
-
-- <code title="get /v2/users/me">client.users_management.me.<a href="./src/ngc/resources/users_management/me.py">retrieve</a>(\*\*<a href="src/ngc/types/users_management/me_retrieve_params.py">params</a>) -> <a href="./src/ngc/types/shared/user.py">User</a></code>
-- <code title="patch /v2/users/me">client.users_management.me.<a href="./src/ngc/resources/users_management/me.py">update</a>(\*\*<a href="src/ngc/types/users_management/me_update_params.py">params</a>) -> <a href="./src/ngc/types/shared/user.py">User</a></code>
-
-# V2AdminOrgUsers
-
-Methods:
-
-- <code title="patch /v2/admin/org/{org-name}/users/{id}/add-role">client.v2_admin_org_users.<a href="./src/ngc/resources/v2_admin_org_users.py">add_role</a>(id, \*, org_name, \*\*<a href="src/ngc/types/v2_admin_org_user_add_role_params.py">params</a>) -> <a href="./src/ngc/types/shared/user.py">User</a></code>
-
-# V2AdminOrgTeams
-
-Methods:
-
-- <code title="get /v2/admin/org/{org-name}/teams/{team-name}">client.v2_admin_org_teams.<a href="./src/ngc/resources/v2_admin_org_teams.py">retrieve</a>(team_name, \*, org_name) -> BinaryAPIResponse</code>
-- <code title="patch /v2/admin/org/{org-name}/teams/{team-name}">client.v2_admin_org_teams.<a href="./src/ngc/resources/v2_admin_org_teams.py">update</a>(team_name, \*, org_name, \*\*<a href="src/ngc/types/v2_admin_org_team_update_params.py">params</a>) -> BinaryAPIResponse</code>
-
-# V2AdminOrgTeamUsers
-
-Methods:
-
-- <code title="patch /v2/admin/org/{org-name}/team/{team-name}/users/{id}/add-role">client.v2_admin_org_team_users.<a href="./src/ngc/resources/v2_admin_org_team_users.py">add_role</a>(id, \*, org_name, team_name, \*\*<a href="src/ngc/types/v2_admin_org_team_user_add_role_params.py">params</a>) -> <a href="./src/ngc/types/shared/user.py">User</a></code>
-
-# V2AdminOrgEntitlements
-
-Methods:
-
-- <code title="get /v2/admin/org/{org-name}/entitlements">client.v2_admin_org_entitlements.<a href="./src/ngc/resources/v2_admin_org_entitlements.py">retrieve_all</a>(org_name, \*\*<a href="src/ngc/types/v2_admin_org_entitlement_retrieve_all_params.py">params</a>) -> BinaryAPIResponse</code>
-
-# V2AdminEntitlements
-
-Methods:
-
-- <code title="get /v2/admin/entitlements">client.v2_admin_entitlements.<a href="./src/ngc/resources/v2_admin_entitlements.py">retrieve_all</a>(\*\*<a href="src/ngc/types/v2_admin_entitlement_retrieve_all_params.py">params</a>) -> BinaryAPIResponse</code>
+- <code title="post /v2/admin/users/{id}/crm-sync">client.admin.users.<a href="./src/ngc/resources/admin/users.py">crm_sync</a>(id) -> <a href="./src/ngc/types/admin/user_crm_sync_response.py">UserCRMSyncResponse</a></code>
+- <code title="post /v2/admin/users/{id}/migrate-deprecated-roles">client.admin.users.<a href="./src/ngc/resources/admin/users.py">migrate_deprecated_roles</a>(id) -> <a href="./src/ngc/types/shared/user.py">User</a></code>
 
 # Services
 
@@ -268,30 +224,6 @@ from ngc.types import ServiceVersionResponse
 Methods:
 
 - <code title="get /version">client.services.<a href="./src/ngc/resources/services.py">version</a>(\*\*<a href="src/ngc/types/service_version_params.py">params</a>) -> <a href="./src/ngc/types/service_version_response.py">ServiceVersionResponse</a></code>
-
-# V3OrgsUsers
-
-Methods:
-
-- <code title="get /v3/orgs/{org-name}/users/{user-email-or-id}">client.v3_orgs_users.<a href="./src/ngc/resources/v3_orgs_users.py">retrieve</a>(user_email_or_id, \*, org_name) -> <a href="./src/ngc/types/shared/user.py">User</a></code>
-
-# V3OrgsTeamsUsers
-
-Methods:
-
-- <code title="get /v3/orgs/{org-name}/teams/{team-name}/users/{user-email-or-id}">client.v3_orgs_teams_users.<a href="./src/ngc/resources/v3_orgs_teams_users.py">retrieve</a>(user_email_or_id, \*, org_name, team_name) -> <a href="./src/ngc/types/shared/user.py">User</a></code>
-
-# V3Orgs
-
-Types:
-
-```python
-from ngc.types import OrgInvitation
-```
-
-Methods:
-
-- <code title="get /v3/orgs/proto-org/validate">client.v3_orgs.<a href="./src/ngc/resources/v3_orgs.py">validate</a>(\*\*<a href="src/ngc/types/v3_org_validate_params.py">params</a>) -> <a href="./src/ngc/types/org_invitation.py">OrgInvitation</a></code>
 
 # Roles
 

@@ -1,34 +1,13 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from typing import Optional
 from typing_extensions import Literal
 
 from pydantic import Field as FieldInfo
 
-from .team import Team
 from ..._models import BaseModel
 
-__all__ = ["TeamList", "PaginationInfo", "RequestStatus"]
-
-
-class PaginationInfo(BaseModel):
-    index: Optional[int] = None
-    """Page index of results"""
-
-    next_page: Optional[str] = FieldInfo(alias="nextPage", default=None)
-    """Serialized pointer to the next results page.
-
-    Should be used for fetching next page. Can be empty
-    """
-
-    size: Optional[int] = None
-    """Number of results in page"""
-
-    total_pages: Optional[int] = FieldInfo(alias="totalPages", default=None)
-    """Total number of pages available"""
-
-    total_results: Optional[int] = FieldInfo(alias="totalResults", default=None)
-    """Total number of results available"""
+__all__ = ["UserCRMSyncResponse", "RequestStatus"]
 
 
 class RequestStatus(BaseModel):
@@ -67,10 +46,5 @@ class RequestStatus(BaseModel):
     status_description: Optional[str] = FieldInfo(alias="statusDescription", default=None)
 
 
-class TeamList(BaseModel):
-    pagination_info: Optional[PaginationInfo] = FieldInfo(alias="paginationInfo", default=None)
-    """object that describes the pagination information"""
-
+class UserCRMSyncResponse(BaseModel):
     request_status: Optional[RequestStatus] = FieldInfo(alias="requestStatus", default=None)
-
-    teams: Optional[List[Team]] = None

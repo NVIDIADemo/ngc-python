@@ -10,7 +10,7 @@ import pytest
 from ngc import Ngc, AsyncNgc
 from tests.utils import assert_matches_type
 from ngc.pagination import SyncPageNumberTeams, AsyncPageNumberTeams
-from ngc.types.orgs import TeamListResponse
+from ngc.types.shared import Team
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -23,7 +23,7 @@ class TestTeams:
         team = client.orgs.teams.list(
             org_name="org-name",
         )
-        assert_matches_type(SyncPageNumberTeams[TeamListResponse], team, path=["response"])
+        assert_matches_type(SyncPageNumberTeams[Team], team, path=["response"])
 
     @parametrize
     def test_method_list_with_all_params(self, client: Ngc) -> None:
@@ -32,7 +32,7 @@ class TestTeams:
             page_number=0,
             page_size=0,
         )
-        assert_matches_type(SyncPageNumberTeams[TeamListResponse], team, path=["response"])
+        assert_matches_type(SyncPageNumberTeams[Team], team, path=["response"])
 
     @parametrize
     def test_raw_response_list(self, client: Ngc) -> None:
@@ -43,7 +43,7 @@ class TestTeams:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         team = response.parse()
-        assert_matches_type(SyncPageNumberTeams[TeamListResponse], team, path=["response"])
+        assert_matches_type(SyncPageNumberTeams[Team], team, path=["response"])
 
     @parametrize
     def test_streaming_response_list(self, client: Ngc) -> None:
@@ -54,7 +54,7 @@ class TestTeams:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             team = response.parse()
-            assert_matches_type(SyncPageNumberTeams[TeamListResponse], team, path=["response"])
+            assert_matches_type(SyncPageNumberTeams[Team], team, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -74,7 +74,7 @@ class TestAsyncTeams:
         team = await async_client.orgs.teams.list(
             org_name="org-name",
         )
-        assert_matches_type(AsyncPageNumberTeams[TeamListResponse], team, path=["response"])
+        assert_matches_type(AsyncPageNumberTeams[Team], team, path=["response"])
 
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncNgc) -> None:
@@ -83,7 +83,7 @@ class TestAsyncTeams:
             page_number=0,
             page_size=0,
         )
-        assert_matches_type(AsyncPageNumberTeams[TeamListResponse], team, path=["response"])
+        assert_matches_type(AsyncPageNumberTeams[Team], team, path=["response"])
 
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncNgc) -> None:
@@ -94,7 +94,7 @@ class TestAsyncTeams:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         team = await response.parse()
-        assert_matches_type(AsyncPageNumberTeams[TeamListResponse], team, path=["response"])
+        assert_matches_type(AsyncPageNumberTeams[Team], team, path=["response"])
 
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncNgc) -> None:
@@ -105,7 +105,7 @@ class TestAsyncTeams:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             team = await response.parse()
-            assert_matches_type(AsyncPageNumberTeams[TeamListResponse], team, path=["response"])
+            assert_matches_type(AsyncPageNumberTeams[Team], team, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
